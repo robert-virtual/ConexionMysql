@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="ConexionMysql.Listas"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ConexionMysql"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <RelativePanel Margin="20">
+            <StackPanel x:Name="col1">
+                <ListView ItemsSource="{x:Bind Clientes}"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="local:Cliente">
+                            <TextBlock Text="{x:Bind name}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+            </StackPanel>
+            <StackPanel x:Name="col2" RelativePanel.RightOf="col1">
+                <TextBox x:Name="NewName" PlaceholderText="Nombre"/>
+                <Button x:Name="BtnAdd" Click="BtnAdd_Click" Content="Agragar"/>
+                
+            </StackPanel>
+            
+        </RelativePanel>
+    </Grid>
+</Page>

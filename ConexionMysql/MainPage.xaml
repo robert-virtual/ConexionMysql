@@ -1,0 +1,93 @@
+﻿<Page
+    x:Class="ConexionMysql.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ConexionMysql"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+
+       
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            
+        <StackPanel   Orientation="Horizontal">
+            <Button x:Name="NewConexion" Content="Nueva Conexion" Margin="20" Click="NewConexion_Click" />
+            <Button x:Name="DeleteAll" Content="Eliminar Todas" Margin="20" Click="DeleteAll_Click" />
+
+        </StackPanel>
+        <ListView   
+                  x:Name="ListViewConexiones" 
+                          ItemsSource="{x:Bind Conexions, Mode=OneWay}"
+                          Height="500"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:UserConexion">
+                    <UserControl>
+                        <UserControl.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem 
+                                    Icon="Open"
+                                    Text="Abrir"
+                                    Command="{x:Bind open}" 
+                                    CommandParameter="{x:Bind Id}" />
+                                
+                                    <MenuFlyoutItem 
+                                    Icon="Delete"
+                                    Text="Eliminar"
+                                    Command="{x:Bind Command}" 
+                                    CommandParameter="{x:Bind Id}" />
+
+                                    <MenuFlyoutItem 
+                                    Icon="Edit"
+                                    Text="Editar"
+                                    Command="{x:Bind Command}" 
+                                    CommandParameter="{x:Bind Id}" />
+                                </MenuFlyout>
+                        </UserControl.ContextFlyout>
+
+                        <Grid Padding="0,10" MinWidth="200">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" x:Name="name" Text="{x:Bind Name}"/>
+
+                            <TextBlock  Grid.Row="1" Text="{x:Bind Host}" />
+                        </Grid>
+
+                    </UserControl>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        </StackPanel>
+
+
+
+
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center" Margin="20">
+                <Viewbox MaxHeight="500" HorizontalAlignment="Center" >
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE709;"/>
+                </Viewbox>
+            </StackPanel>
+    </Grid>
+</Page>
